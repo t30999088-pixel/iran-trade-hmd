@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101820">
+<title>IRAN TRADE HMD</title>
+<style>
+:root {
+  --bg:#101820; --card:#1b2935; --gold:#e4b85c;
+  --text:#f5f5f5; --muted:#aab6c0;
+  --green:#25ae78; --red:#d75d5d; --line:#344653;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}
+.container{max-width:1150px;margin:auto;padding:20px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;background:var(--gold);color:#171717;border-radius:14px;display:grid;place-items:center;font-size:23px;font-weight:bold}
+h1{font-size:21px;margin:0}
+.subtitle{font-size:11px;color:var(--muted);margin-top:6px}
+.badge{background:#173c30;color:#80e0b4;border:1px solid #287052;padding:9px 12px;border-radius:30px;font-size:11px}
+.grid{display:grid;gap:14px}
+.prices{grid-template-columns:repeat(3,1fr);margin-top:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;min-width:0}
+.label{font-size:12px;color:var(--muted)}
+.value{font-size:clamp(19px,3vw,27px);font-weight:bold;margin-top:13px;direction:ltr;text-align:right;overflow-wrap:anywhere}
+.unit{font-size:11px;color:var(--muted);margin-top:7px}
+.main{grid-template-columns:1.5fr 1fr;margin-top:15px}
+h2{font-size:15px;margin:0 0 15px}
+.chart{height:210px;background:#14212b;border-radius:12px;padding:8px}
+svg{width:100%;height:100%}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}
+label{display:block;color:var(--muted);font-size:11px;margin-bottom:7px}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#14212b;color:white;font:inherit}
+button{border:0;border-radius:10px;padding:12px;font:inherit;font-weight:bold;cursor:pointer}
+.primary{background:var(--gold);color:#171717}
+.buy{background:var(--green);color:white}
+.sell{background:var(--red);color:white}
+.soft{background:#263746;color:white;border:1px solid var(--line)}
+.wide{width:100%;margin-top:11px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.notice{font-size:11px;color:var(--muted);line-height:2;margin-top:13px}
+.signal{background:#14212b;padding:14px;border-radius:12px;border:1px solid var(--line)}
+.signal strong{color:var(--gold);font-size:18px}
+.signal p{font-size:11px;color:var(--muted);line-height:2}
+.lower{grid-template-columns:1fr 1.4fr;margin-top:15px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#14212b;padding:12px;border-radius:10px}
+.stat span{font-size:10px;color:var(--muted)}
+.stat b{display:block;margin-top:8px;font-size:16px;overflow-wrap:anywhere}
+.tablewrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:11px;white-space:nowrap}
+td,th{text-align:right;padding:11px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:22px}
+.toast{color:var(--gold);font-size:11px;min-height:20px;margin-top:10px}
+.green{color:var(--green)}.red{color:var(--red)}
+footer{text-align:center;color:var(--muted);font-size:10px;padding:22px}
+@media(max-width:760px){
+ .container{padding:13px}
+ .prices{grid-template-columns:1fr 1fr}
+ .main,.lower{grid-template-columns:1fr}
+ header{align-items:flex-start}
+ .badge{font-size:9px}
+}
+@media(max-width:390px){.fields{grid-template-columns:1fr}h1{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+ <div class="brand">
+  <div class="logo">H</div>
+  <div>
+   <h1>IRAN TRADE HMD</h1>
+   <div class="subtitle">سامانه تحلیل بازار طلا و معاملات آزمایشی</div>
+  </div>
+ </div>
+ <div class="badge">● حساب آزمایشی فعال</div>
+</header>
+
+<section class="grid prices">
+ <div class="card">
+  <div class="label">طلای ۱۸ عیار · هر گرم</div>
+  <div class="value" id="goldPrice">—</div>
+  <div class="unit">تومان · قیمت دستی</div>
+ </div>
+ <div class="card">
+  <div class="label">دلار آزاد</div>
+  <div class="value" id="usdPrice">—</div>
+  <div class="unit">تومان · قیمت دستی</div>
+ </div>
+ <div class="card">
+  <div class="label">سرمایه اولیه آزمایشی</div>
+  <div class="value">۵ میلیارد</div>
+  <div class="unit">تومان · بدون پول واقعی</div>
+ </div>
+</section>
+
+<section class="grid main">
+ <div class="card">
+  <h2>نمودار قیمت طلا</h2>
+  <div class="chart">
+   <svg viewBox="0 0 600 190" preserveAspectRatio="none">
+    <path d="M0 40H600 M0 90H600 M0 140H600" stroke="#344653" stroke-dasharray="5 5" fill="none"/>
+    <path d="M0 150 L50 130 L100 140 L150 100 L200 115 L250 85 L300 105 L350 65 L400 80 L450 45 L500 60 L550 25 L600 35" fill="none" stroke="#e4b85c" stroke-width="3" stroke-linecap="round"/>
+   </svg>
+  </div>
+  <div class="notice">نمودار فعلی نمونه است. با اتصال منبع داده، نمودار واقعی و تاریخچه قیمت اضافه خواهد شد.</div>
+
+  <div class="fields">
+   <div>
+    <label for="goldInput">قیمت طلا (تومان)</label>
+    <input id="goldInput" type="number" min="1" placeholder="مثلاً ۱۰۰۰۰۰۰۰">
+   </div>
+   <div>
+    <label for="usdInput">قیمت دلار (تومان)</label>
+    <input id="usdInput" type="number" min="1" placeholder="مثلاً ۱۰۰۰۰۰">
+   </div>
+  </div>
+  <button class="primary wide" id="apply">ثبت قیمت‌ها</button>
+ </div>
+
+ <div class="card">
+  <h2>تحلیل بازار</h2>
+  <div class="signal">
+   <div class="label">وضعیت سیگنال آموزشی</div>
+   <strong id="signal">منتظر داده</strong>
+   <p id="reason">برای تحلیل بازار باید قیمت و تاریخچه معتبر دریافت شود.</p>
+  </div>
+  <div class="notice">سیگنال خرید، فروش یا صبر در نسخه‌های بعدی با بررسی روند و شاخص‌های تحلیلی محاسبه می‌شود. هیچ سیگنالی تضمین سود نیست.</div>
+ </div>
+</section>
+
+<section class="grid lower">
+ <div class="card">
+  <h2>حساب معاملات مجازی</h2>
+  <div class="stats">
+   <div class="stat"><span>موجودی نقدی</span><b id="cash">۵٬۰۰۰٬۰۰۰٬۰۰۰</b></div>
+   <div class="stat"><span>مقدار طلا</span><b id="grams">۰ گرم</b></div>
+   <div class="stat"><span>ارزش کل حساب</span><b id="equity">۵٬۰۰۰٬۰۰۰٬۰۰۰</b></div>
+   <div class="stat"><span>سود و زیان</span><b id="pnl">۰ تومان</b></div>
+  </div>
+
+  <div class="fields">
+   <div>
+    <label for="quantity">مقدار معامله (گرم)</label>
+    <input id="quantity" type="number" min="0.001" step="0.001" value="1">
+   </div>
+  </div>
+
+  <div class="actions">
+   <button class="buy" id="buy">خرید مجازی</button>
+   <button class="sell" id="sell">فروش مجازی</button>
+  </div>
+  <button class="soft wide" id="reset">بازنشانی حساب</button>
+  <div class="toast" id="message"></div>
+ </div>
+
+ <div class="card">
+  <h2>تاریخچه معاملات</h2>
+  <div class="tablewrap">
+   <table>
+    <thead><tr><th>نوع</th><th>مقدار</th><th>قیمت</th><th>زمان</th></tr></thead>
+    <tbody id="history"><tr><td colspan="4" class="empty">هنوز معامله‌ای ثبت نشده است.</td></tr></tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<footer>
+ IRAN TRADE HMD · نسخه اولیه · فقط معاملات آزمایشی
+</footer>
+</div>
+
+<script>
+(()=>{
+const START=5000000000;
+const FEE=0.001;
+let state={
+ cash:START, grams:0, avg:0, realized:0,
+ trades:[], price:0, usd:0
+};
+const $=id=>document.getElementById(id);
+const money=n=>Math.round(n).toLocaleString('fa-IR');
+const gram=n=>n.toLocaleString('fa-IR',{maximumFractionDigits:3});
+
+function message(t){$('message').textContent=t}
+
+function render(){
+ const value=state.price*state.grams;
+ const equity=state.cash+value;
+ const unrealized=value-state.avg*state.grams;
+
+ $('goldPrice').textContent=state.price?money(state.price):'—';
+ $('usdPrice').textContent=state.usd?money(state.usd):'—';
+ $('cash').textContent=money(state.cash);
+ $('grams').textContent=gram(state.grams)+' گرم';
+ $('equity').textContent=money(equity);
+ $('pnl').textContent=money(state.realized+unrealized)+' تومان';
+
+ $('history').innerHTML=state.trades.length?
+ state.trades.slice().reverse().slice(0,20).map(t=>
+ `<tr><td class="${t.type==='خرید'?'green':'red'}">${t.type}</td>
+ <td>${gram(t.qty)} گرم</td><td>${money(t.price)}</td><td>${t.time}</td></tr>`
+ ).join(''):
+ '<tr><td colspan="4" class="empty">هنوز معامله‌ای ثبت نشده است.</td></tr>';
+}
+
+function applyPrices(){
+ const p=Number($('goldInput').value);
+ const u=Number($('usdInput').value);
+ if(!p||p<=0){message('قیمت معتبر طلا وارد کن.');return}
+ state.price=p;
+ if(u>0)state.usd=u;
+ $('signal').textContent='داده دستی ثبت شد';
+ $('reason').textContent='برای تحلیل معتبر، تاریخچه قیمت و داده زنده لازم است.';
+ message('قیمت‌ها ثبت شدند. این اعداد دستی هستند.');
+ render();
+}
+
+function trade(type){
+ const p=state.price;
+ const q=Number($('quantity').value);
+ if(!p){message('ابتدا قیمت طلا را ثبت کن.');return}
+ if(!q||q<=0){message('مقدار معامله معتبر نیست.');return}
+
+ const total=p*q;
+ const fee=total*FEE;
+
+ if(type==='خرید'){
+  if(total+fee>state.cash){message('موجودی آزمایشی کافی نیست.');return}
+  state.avg=(state.avg*state.grams+total)/(state.grams+q);
+  state.grams+=q;
+  state.cash-=total+fee;
+ }else{
+  if(q>state.grams){message('مقدار طلای آزمایشی کافی نیست.');return}
+  state.cash+=total-fee;
+  state.realized+=total-fee-state.avg*q;
+  state.grams-=q;
+  if(state.grams<0.00000001){state.grams=0;state.avg=0}
+ }
+
+ state.trades.push({
+  type,qty:q,price:p,
+  time:new Date().toLocaleString('fa-IR')
+ });
+ message(type+' مجازی ثبت شد. کارمزد: '+money(fee)+' تومان');
+ render();
+}
+
+$('apply').addEventListener('click',applyPrices);
+$('buy').addEventListener('click',()=>trade('خرید'));
+$('sell').addEventListener('click',()=>trade('فروش'));
+
+$('reset').addEventListener('click',()=>{
+ if(!confirm('حساب آزمایشی بازنشانی شود؟'))return;
+ state={
+  cash:START,grams:0,avg:0,realized:0,
+  trades:[],price:state.price,usd:state.usd
+ };
+ message('حساب آزمایشی بازنشانی شد.');
+ render();
+});
+
+render();
+})();
+</script>
+</body>
+</html>
